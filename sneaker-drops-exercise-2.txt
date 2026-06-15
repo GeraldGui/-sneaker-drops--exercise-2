@@ -1,0 +1,48 @@
+STEP 1 — HTTP MethodsGET — Show every game. Read-only, no changes to the server.
+
+POST — Add a new game. Creates a new resource, server assigns the ID.
+
+PUT — Replace game 5's details. Fully overwrites a specific resource at /api/games/5.
+
+DELETE — Remove game 5. Permanently deletes that specific resource.\
+
+STEP 2 — Status Codes
+2xx = Success
+
+3xx = Redirect
+
+4xx = Client error (YOU messed up)
+
+5xx = Server error (SERVER messed up)
+200 OK — Game found and returned successfully.
+
+201 Created — New game was created (POST response).
+
+204 No Content — Success but nothing to return. Used after DELETE. NOT 200.
+
+400 Bad Request — Client sent broken/invalid data.
+
+404 Not Found — That resource doesn't exist. This is 4xx, NOT 3xx.
+
+500 Internal Server Error — Server code crashed. This is 5xx, NOT 4xx.
+
+STEP 3 — Safe vs Idempotent
+Safe = calling it never modifies anything on the server. Pure read.
+
+Idempotent = calling it once or 100 times leaves the server in the exact same final state.
+GET — safe AND idempotent. Just reads, never changes anything.
+
+PUT — idempotent only. Calling it 10 times still leaves game 5 with the same data.
+
+DELETE — idempotent only. After the first call game 5 is gone. Calling it again changes nothing.
+
+POST — NEITHER. Every call creates a new resource with a new ID. Not safe (it changes data), not idempotent (each call produces a different result).
+
+STEP 4 — Raw HTTP Exchange
+Request:
+
+GET /api/games/3 HTTP/1.1
+
+Host: localhost:8080
+
+Accept: application/json
