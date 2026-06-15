@@ -46,3 +46,22 @@ GET /api/games/3 HTTP/1.1
 Host: localhost:8080
 
 Accept: application/json
+
+Response:
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{"id": 3, "title": "Celeste", "releaseYear": 2018, "rating": 9.1}
+Breakdown:
+
+Method — GET (first word of the request line)
+
+Path — /api/games/3 (second item on the request line)
+
+Header — Accept: application/json (request) / Content-Type: application/json (response)
+
+Status line — HTTP/1.1 200 OK (first line of the response)
+
+Body — the JSON object below the headers
